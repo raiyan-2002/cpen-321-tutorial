@@ -10,6 +10,10 @@ const app = express();
 app.use(express.json());
 app.use(morgan('tiny'));
 
+app.get('/', (req: Request, res: Response, next: NextFunction) => {
+    res.send('Hello World!');
+});
+
 TodoRoutes.forEach((route) => {
     (app as any)[route.method](
         route.route,
@@ -39,7 +43,7 @@ client.connect().then(() => {
     console.log('Connected to MongoDB');
 
     app.listen(process.env.PORT, () => {
-        console.log('Listening on port ' + process.env.PORT);
+        console.log('Now listening on port ' + process.env.PORT);
     });
 }).catch(err => {
     console.error('Failed to connect to MongoDB', err);
